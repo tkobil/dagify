@@ -1,6 +1,5 @@
 package com.tkobil.dagify
 
-import com.tkobil.dagify.CyclicGraphException
 
 object Colors {
   val white = 0
