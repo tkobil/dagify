@@ -6,7 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="919a2c04-90ac-49ac-b7a4-6b6a213d0fb9" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/scala/com/tkobil/dagify/CustomExceptions.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/com/tkobil/dagify/CyclicGraphException.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/scala/com/tkobil/dagify/Task.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/com/tkobil/dagify/Task.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/scala/com/tkobil/dagify/TopologicalSort.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/com/tkobil/dagify/TopologicalSort.scala" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,11 +92,22 @@
       <option name="presentableId" value="Default" />
       <updated>1661441705949</updated>
       <workItem from="1661441763916" duration="1779000" />
-      <workItem from="1661443561049" duration="3133000" />
+      <workItem from="1661443561049" duration="9948000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
