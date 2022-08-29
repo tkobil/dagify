@@ -9,17 +9,21 @@ Dagify is a tool that can be used for resolving package installation ordering, c
 
 # Example Usage
 ```
+import com.tkobil.dagify.{Dag, DagCreator, Dependency, RunnableSideEffectTask}
+
   # Define Anonymous class, overriding define() method.
   val dag = new DagCreator {
     override def define() = {
-      # Define individual tasks as well as dag
-      val dagInstance = new Dag()
+      val dagInstance = new Dag("sample dag")
       val task = new RunnableSideEffectTask[Int]("print x", x => println(x), 10)
       val anotherTask = new RunnableSideEffectTask[String]("print hello world", x => println(x), "hello world")
       val oneMoreTask = new RunnableSideEffectTask[Int]("print 100", x => println(x), 100)
       val lastTask = new RunnableSideEffectTask[Double]("print 30.2", x => println(x*50), 30.2)
-      # chain together dependencies
-      dagInstance.addDependency(task, anotherTask).addDependency(task, oneMoreTask).addDependency(anotherTask, lastTask)
+      val oneLastTask = new RunnableSideEffectTask[Double]("print 30.8", x => println(x*50), 30.8)
+      val newDagInstance = dagInstance.addDependency(task, anotherTask).addDependency(task, oneMoreTask).addDependency(anotherTask, lastTask)
+
+      // using plain-english feature
+      newDagInstance hasDependency Dependency(oneMoreTask, lastTask) hasDependency Dependency(lastTask, oneLastTask)
     }
   }.define()
 ```
@@ -28,7 +32,7 @@ Dagify is a tool that can be used for resolving package installation ordering, c
 dag.show()
 
 ----------------------------------------------------------------------------------------------------
-START DAG
+START DAG - sample dag
   |
   |
   v
@@ -48,6 +52,10 @@ TASK: print 30.2
   |
   |
   v
+TASK: print 30.8
+  |
+  |
+  v
 END DAG
 ----------------------------------------------------------------------------------------------------
 ```
@@ -60,6 +68,7 @@ dag.run()
 100
 hello world
 1510.0
+1540.0
 ```
 
 #### Dagify is currently undergoing development and is not ready for production use
