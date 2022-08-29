@@ -2,9 +2,9 @@ package com.tkobil.dagify
 
 
 object Colors {
-  val white = 0
-  val gray = 1
-  val black = 2
+  val white = 0 // unprocessed
+  val gray = 1 // processing
+  val black = 2 // processed
 }
 
 
