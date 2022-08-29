@@ -8,7 +8,7 @@ Dagify is different. Dagify aims to simplify the life of the developer working o
 Dagify is a tool that can be used for resolving package installation ordering, compute task scheduling, etc - all while abstracting away the scheduling logic and complex topological sort algorithm.
 
 # Example Usage
-```aidl
+```
   # Define Anonymous class, overriding define() method.
   val dag = new DagCreator {
     override def define() = {
@@ -24,7 +24,7 @@ Dagify is a tool that can be used for resolving package installation ordering, c
   }.define()
 ```
 ### Pretty Print Dag in Topological Sorted Order
-```aidl
+```
 dag.show()
 
 ----------------------------------------------------------------------------------------------------
@@ -53,7 +53,7 @@ END DAG
 ```
 
 ### Run Dag in Topological sorted order
-```aidl
+```
 dag.run()
 
 10
