@@ -8,7 +8,7 @@ class Dag(val dependencyGraph: Map[Task, List[Task]] = Map()) {
   }
 
   def getSorted(): Array[Task] = TopologicalSort(dependencyGraph)
-  def show(): Unit = {
+  def show(): Unit = { // TODO - pretty-print dependecies w/o topological sorted order as well
     printStartDag()
     getSorted().foreach(x => {
       printArrow()
