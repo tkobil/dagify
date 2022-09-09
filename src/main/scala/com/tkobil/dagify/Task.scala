@@ -2,6 +2,7 @@ package com.tkobil.dagify
 
 abstract class Task(val taskName: String) {
   def run(): Unit
+  override def toString = taskName
 }
 
 class RunnableDataTask[T](taskName: String, runnable: T => Unit, dataClass: T) extends Task(taskName) {

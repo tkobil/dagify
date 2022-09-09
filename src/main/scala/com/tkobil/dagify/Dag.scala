@@ -1,5 +1,6 @@
 package com.tkobil.dagify
 
+import java.io.{File, PrintWriter}
 
 // dag extends task
 // this way, tasks can depend on dags, dags can depend on each other, etc.
@@ -30,6 +31,18 @@ class Dag(override val taskName: String, val dependencyGraph: Map[Task, List[Tas
   }
   def run(): Unit = getSorted().foreach(x => x.run())
 
+  def toHTML(fname: String ="dependency_graph.html"): Unit = {
+    val content = html.dagTemplate.render(dependencyGraph).toString
+    val pw = new PrintWriter(new File(fname))
+    try pw.write(content) finally pw.close()
+  }
+
+  def toHTMLSorted(fname: String ="dependency_graph_sorted.html"): Unit = {
+    val sortedTasks: List[Task] = getSorted().toList
+    val content = html.dagTemplateSorted.render(sortedTasks).toString
+    val pw = new PrintWriter(new File(fname))
+    try pw.write(content) finally pw.close()
+  }
 }
 
 abstract class DagCreator(val dagName: String) {
@@ -56,6 +69,9 @@ object DagExample extends App {
       newDagInstance hasDependency Dependency(oneMoreTask, lastTask) hasDependency Dependency(lastTask, oneLastTask) hasDependency Dependency(task, dataLessTask)
     }
   }.define()
+  println(dag.getSorted().map(x => x.toString))
   dag.show()
+  dag.toHTML()
+  dag.toHTMLSorted()
   dag.run()
 }
