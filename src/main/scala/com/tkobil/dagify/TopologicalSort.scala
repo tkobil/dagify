@@ -56,25 +56,25 @@ object TopologicalSort {
 }
 
 object TopologicalSortRunner extends App {
-  val a1 = new RunnableSideEffectTask[Int](
+  val a1 = new RunnableDataTask[Int](
     "a1",
     println,
     30
   )
 
-  val a2 = new RunnableSideEffectTask[Int](
+  val a2 = new RunnableDataTask[Int](
     "a2",
     x => println(x+12),
     24
   )
 
-  val b1 = new RunnableSideEffectTask[String](
+  val b1 = new RunnableDataTask[String](
     "b1",
     x => println(s"hello world from $x"),
     "task b1"
   )
 
-  val b2 = new RunnableSideEffectTask[Double](
+  val b2 = new RunnableDataTask[Double](
     "b2",
     x => println("this is a double test!"),
     32.2

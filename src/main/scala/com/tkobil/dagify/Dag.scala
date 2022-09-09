@@ -32,25 +32,28 @@ class Dag(override val taskName: String, val dependencyGraph: Map[Task, List[Tas
 
 }
 
-abstract class DagCreator {
+abstract class DagCreator(val dagName: String) {
   def define(): Dag = ???
 
 }
 
 object DagExample extends App {
 
-  val dag = new DagCreator {
-    override def define() = {
-      val dagInstance = new Dag("sample dag")
-      val task = new RunnableSideEffectTask[Int]("print x", x => println(x), 10)
-      val anotherTask = new RunnableSideEffectTask[String]("print hello world", x => println(x), "hello world")
-      val oneMoreTask = new RunnableSideEffectTask[Int]("print 100", x => println(x), 100)
-      val lastTask = new RunnableSideEffectTask[Double]("print 30.2", x => println(x*50), 30.2)
-      val oneLastTask = new RunnableSideEffectTask[Double]("print 30.8", x => println(x*50), 30.8)
+  val dag = new DagCreator("Sample Dag") {
+    override def define(): Dag = {
+      val dagInstance = new Dag(this.dagName)
+      val task = new RunnableDataTask[Int]("print x", x => println(x), 10)
+      val anotherTask = new RunnableDataTask[String]("print hello world", x => println(x), "hello world")
+      val oneMoreTask = new RunnableDataTask[Int]("print 100", x => println(x), 100)
+      val lastTask = new RunnableDataTask[Double]("print 30.2", x => println(x*50), 30.2)
+      val oneLastTask = new RunnableDataTask[Double]("print 30.8", x => println(x*50), 30.8)
+
+      // chaining dependencies
       val newDagInstance = dagInstance.addDependency(task, anotherTask).addDependency(task, oneMoreTask).addDependency(anotherTask, lastTask)
 
+      val dataLessTask = new RunnableDataLessTask("data-less task", println("data-less"))
       // using plain-english feature
-      newDagInstance hasDependency Dependency(oneMoreTask, lastTask) hasDependency Dependency(lastTask, oneLastTask)
+      newDagInstance hasDependency Dependency(oneMoreTask, lastTask) hasDependency Dependency(lastTask, oneLastTask) hasDependency Dependency(task, dataLessTask)
     }
   }.define()
   dag.show()
